@@ -1,7 +1,7 @@
 export default {
   login: "Login",
     home: "Home",
-    me: "My Profile",
+    me: "Profile",
     "403": "403 Forbidden",
     "404": "404 Not Found",
     keepAlive: "Keep Alive Cache",
@@ -11,5 +11,9 @@ export default {
     color: "Gray & Color Weak Mode",
     i18n: "Internationalization",
     markdown: "Markdown Viewer",
-    chart: "Chart"
+    chart: "Chart",
+    demoGroup: "Demo Collection",
+    moreDemo: "More Demos",
+    prTip: "🔥 More excellent demos – we look forward to your PR 👏🏻",
+    dashboard: "Dashboard",
 }

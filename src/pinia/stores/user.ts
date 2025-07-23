@@ -5,45 +5,58 @@ import { pinia } from "@/pinia"
 export const useUserStore = defineStore("user", () => {
   const token = ref<string>(getToken() || "")
 
+  const fullName = ref<string>("")
+  const gender = ref<string>("")
+  const professional = ref<string>("")
+  const businessCountry = ref<string>("")
+  const avatar = ref<string>("")
+  const email = ref<string>("")
   const roles = ref<string[]>([])
 
-  const username = ref<string>("")
-
-  // 设置 Token
   const setToken = (value: string) => {
     _setToken(value)
     token.value = value
   }
 
-  // 获取用户详情
   const getInfo = async () => {
     const { data } = await getCurrentUserApi()
-    username.value = data.username
-    roles.value = data.roles
+    console.log("User Info:", data)
+    fullName.value = data.user.fullName
+    gender.value = data.user.gender
+    professional.value = data.user.professional
+    businessCountry.value = data.user.businessCountry
+    avatar.value = data.user.avatar
+    email.value = data.user.email
   }
 
   const changeRoles = (role: string) => {
     const newToken = `token-${role}`
     token.value = newToken
     _setToken(newToken)
-    // 用刷新页面代替重新登录
     location.reload()
   }
 
-  // 重置 Token
   const resetToken = () => {
     removeToken()
     token.value = ""
-    roles.value = []
   }
 
-  return { token, roles, username, setToken, getInfo, changeRoles, resetToken }
+  return {
+    roles,
+    token,
+    fullName,
+    gender,
+    professional,
+    businessCountry,
+    email,
+    avatar,
+    setToken,
+    getInfo,
+    changeRoles,
+    resetToken
+  }
 })
 
-/**
- * @description 在 SPA 应用中可用于在 pinia 实例被激活前使用 store
- * @description 在 SSR 应用中可用于在 setup 外使用 store
- */
 export function useUserStoreOutside() {
   return useUserStore(pinia)
 }

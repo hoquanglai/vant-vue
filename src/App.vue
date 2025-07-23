@@ -7,26 +7,30 @@ const userStore = useUserStore()
 
 const { isDark, initDark } = useDark()
 
-const isLoading = computed(() => userStore.token && !userStore.username)
+const isLoading = computed(() => userStore.token && !userStore.fullName)
 
-watch(
-  () => userStore.token,
-  (newVal) => {
-    newVal && userStore.getInfo()
-  },
-  {
-    immediate: true
-  }
-)
+onMounted(() => {
+  userStore.getInfo()
+})
+
+// watch(
+//   () => userStore.token,
+//   (newVal) => {
+//     newVal && userStore.getInfo()
+//   },
+//   {
+//     immediate: true
+//   }
+// )
 
 initDark()
 </script>
 
 <template>
   <van-config-provider :theme="isDark ? 'dark' : 'light'" un-h-full>
-    <van-loading v-if="isLoading" un-h-full un-flex-center>
+    <!-- <van-loading v-if="isLoading" un-h-full un-flex-center>
       loading...
-    </van-loading>
-    <Layout v-else />
+    </van-loading> -->
+    <Layout />
   </van-config-provider>
 </template>

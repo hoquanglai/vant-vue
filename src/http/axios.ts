@@ -4,88 +4,94 @@ import axios from "axios"
 import { get, merge } from "lodash-es"
 import { useUserStore } from "@/pinia/stores/user"
 
-/** 退出登录并强制刷新页面（会重定向到登录页） */
+/** Logout and force refresh the page (will redirect to login page) */
 function logout() {
   useUserStore().resetToken()
   location.reload()
 }
 
-/** 创建请求实例 */
+/** Create Axios instance */
 function createInstance() {
-  // 创建一个 axios 实例命名为 instance
+  // Create an axios instance named "instance"
   const instance = axios.create()
-  // 请求拦截器
+
+  // Request interceptor
   instance.interceptors.request.use(
-    // 发送之前
+    // Before sending request
     config => config,
-    // 发送失败
+    // Request error
     error => Promise.reject(error)
   )
-  // 响应拦截器（可根据具体业务作出相应的调整）
+
+  // Response interceptor (adjust logic according to business needs)
   instance.interceptors.response.use(
     (response) => {
-      // apiData 是 api 返回的数据
+      // apiData is the data returned by API
       const apiData = response.data
-      // 二进制数据则直接返回
+
+      // If it's binary data, return it directly
       const responseType = response.request?.responseType
       if (responseType === "blob" || responseType === "arraybuffer") return apiData
-      // 这个 code 是和后端约定的业务 code
+
+      // "code" is the business code agreed with backend
       const code = apiData.code
-      // 如果没有 code, 代表这不是项目后端开发的 api
-      if (code === undefined) {
-        return Promise.reject(new Error("非本系统的接口"))
+
+      // If there's no code, this API is not from our backend
+
+      if (code !== undefined) {
+        switch (code) {
+          case 0:
+            return apiData
+          case 401:
+            return logout()
+          default:
+            return Promise.reject(new Error(apiData.message || "Error"))
+        }
       }
-      switch (code) {
-        case 0:
-          // 本系统采用 code === 0 来表示没有业务错误
-          return apiData
-        case 401:
-          // 登录过期
-          return logout()
-        default:
-          // 不是正确的 code
-          return Promise.reject(new Error(apiData.message || "Error"))
+      if (apiData.status === "success") {
+        return apiData
       }
     },
     (error) => {
-      // status 是 HTTP 状态码
+      // "status" is the HTTP status code
       const status = get(error, "response.status")
       const message = get(error, "response.data.message")
+
       switch (status) {
         case 400:
-          error.message = "请求错误"
+          error.message = "Bad Request"
           break
         case 401:
-          // 登录过期
-          error.message = message || "登录过期"
+          // Session expired
+          error.message = message || "Unauthorized"
           logout()
           break
         case 403:
-          error.message = message || "拒绝访问"
+          error.message = message || "Forbidden"
           break
         case 404:
-          error.message = "请求地址出错"
+          error.message = "Not Found"
           break
         case 408:
-          error.message = "请求超时"
+          error.message = "Request Timeout"
           break
         case 500:
-          error.message = "服务器内部错误"
+          error.message = "Internal Server Error"
           break
         case 501:
-          error.message = "服务未实现"
+          error.message = "Not Implemented"
           break
         case 502:
-          error.message = "网关错误"
+          error.message = "Bad Gateway"
           break
         case 503:
-          error.message = "服务不可用"
+          error.message = "Service Unavailable"
           break
         case 504:
-          error.message = "网关超时"
+          error.message = "Gateway Timeout"
           break
         case 505:
-          error.message = "HTTP 版本不受支持"
+          error.message = "HTTP Version Not Supported"
           break
       }
       return Promise.reject(error)
@@ -94,35 +100,35 @@ function createInstance() {
   return instance
 }
 
-/** 创建请求方法 */
+/** Create request method */
 function createRequest(instance: AxiosInstance) {
   return <T>(config: AxiosRequestConfig): Promise<T> => {
     const token = getToken()
-    // 默认配置
+    // Default configuration
     const defaultConfig: AxiosRequestConfig = {
-      // 接口地址
+      // API base URL
       baseURL: import.meta.env.VITE_BASE_URL,
-      // 请求头
+      // Request headers
       headers: {
-        // 携带 Token
-        "Authorization": token ? `Bearer ${token}` : undefined,
-        "Content-Type": "application/json"
+        // Attach Token
+        // "Authorization": token ? `Bearer ${token}` : undefined,
+        "Content-Type": "application/json",
+        "X-Requested-With": "XMLHttpRequest"
       },
-      // 请求体
+      withCredentials: true,
+      // Request body
       data: {},
-      // 请求超时
+      // Timeout
       timeout: 5000,
-      // 跨域请求时是否携带 Cookies
-      withCredentials: false
     }
-    // 将默认配置 defaultConfig 和传入的自定义配置 config 进行合并成为 mergeConfig
+    // Merge defaultConfig and custom config into mergeConfig
     const mergeConfig = merge(defaultConfig, config)
     return instance(mergeConfig)
   }
 }
 
-/** 用于请求的实例 */
+/** Axios instance for requests */
 const instance = createInstance()
 
-/** 用于请求的方法 */
+/** Request function */
 export const request = createRequest(instance)

@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import { useI18n } from "vue-i18n"
+
+const { t, locale } = useI18n()
 const route = useRoute()
 
 const router = useRouter()
 
-const title = computed(() => route.meta.title)
+const title = computed(() => t(route.meta.title as string) || "Default Title")
 
 const showLeftArrow = computed(() => route.meta.layout?.navBar?.showLeftArrow)
 

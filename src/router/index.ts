@@ -35,6 +35,24 @@ export const routes: RouteRecordRaw[] = [
     }
   },
   {
+    path: "/dashboard",
+    component: () => import("@/pages/dashboard/index.vue"),
+    name: "Dashboard",
+    meta: {
+      title: "routes.dashboard",
+      layout: {
+        navBar: {
+          showNavBar: false,
+          showLeftArrow: false
+        },
+        tabbar: {
+          showTabbar: true,
+          icon: "apps-o"
+        }
+      }
+    }
+  },
+  {
     path: "/",
     component: () => import("@/pages/home/index.vue"),
     name: "Home",

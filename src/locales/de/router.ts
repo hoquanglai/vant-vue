@@ -1,7 +1,7 @@
 export default {
   login: "Anmeldung",
     home: "Startseite",
-    me: "Mein Profil",
+    me: "Profil",
     "403": "403 Verboten",
     "404": "404 Nicht gefunden",
     keepAlive: "Routen-Caching",
@@ -14,5 +14,6 @@ export default {
     chart: "Diagramm",
     demoGroup: "Beispielsammlung",
     moreDemo: "Weitere Beispiele",
-    prTip: "🔥 Weitere tolle Beispiele – wir freuen uns auf deinen PR 👏🏻"
+    prTip: "🔥 Weitere tolle Beispiele – wir freuen uns auf deinen PR 👏🏻",
+    dashboard: "Dashboard",
 }

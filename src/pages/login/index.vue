@@ -17,14 +17,14 @@ const loginFormData: LoginRequestData = reactive({
 
 function onSubmit() {
   loading.value = true
-  loginApi(loginFormData).then(({ data }) => {
-    userStore.setToken(data.token)
+  // loginApi(loginFormData).then(({ data }) => {
+    userStore.setToken('data.token')
     router.push("/")
-  }).catch(() => {
-    loginFormData.password = ""
-  }).finally(() => {
+  // }).catch(() => {
+  //   loginFormData.password = ""
+  // }).finally(() => {
     loading.value = false
-  })
+  // })
 }
 </script>
 
@@ -36,7 +36,7 @@ function onSubmit() {
         <van-field
           v-model="loginFormData.username"
           name="username"
-          label="用户名"
+          label="username"
           size="large"
           :rules="[{ required: true, message: '请填写用户名' }]"
         />
@@ -44,7 +44,7 @@ function onSubmit() {
           v-model="loginFormData.password"
           type="password"
           name="password"
-          label="密码"
+          label="password"
           size="large"
           :rules="[{ required: true, message: '请填写密码' }]"
         />

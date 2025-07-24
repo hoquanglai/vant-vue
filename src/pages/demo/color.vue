@@ -14,20 +14,21 @@ function onChange(name: Mode) {
 
 <template>
   <div un-mb-20px>
-    <NoticeBar text="针对哀悼场景和色弱色盲人群" />
+    <NoticeBar text="Designed for mourning scenarios and people with color vision deficiency" />
+
     <van-radio-group v-model="checked" @change="onChange">
-      <van-cell-group title="切换模式" inset>
-        <van-cell title="无" @click="checked = ''">
+      <van-cell-group title="Switch Mode" inset>
+        <van-cell title="None" @click="checked = ''">
           <template #right-icon>
             <van-radio name="" />
           </template>
         </van-cell>
-        <van-cell title="灰色模式" @click="checked = 'grayscale'">
+        <van-cell title="Grayscale Mode" @click="checked = 'grayscale'">
           <template #right-icon>
             <van-radio name="grayscale" />
           </template>
         </van-cell>
-        <van-cell title="色弱模式" @click="checked = 'colorblind'">
+        <van-cell title="Colorblind Mode" @click="checked = 'colorblind'">
           <template #right-icon>
             <van-radio name="colorblind" />
           </template>

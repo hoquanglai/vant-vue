@@ -1,5 +1,5 @@
 <script setup lang="ts"></script>
 
 <template>
-  <van-empty description="作者正在努力，点个 Star 为作者加速！" />
+  <van-empty description="The author is working hard — give a ⭐ to help speed things up！" />
 </template>

@@ -11,7 +11,7 @@ const { setWatermark: setGlobalWatermark, clearWatermark: clearGlobalWatermark }
 
 <template>
   <div un-mb-20px>
-    <NoticeBar text="支持局部、全局、自定义样式，并自带防御和自适应功能" />
+    <NoticeBar text="Supports partial, global, and custom styles, with built-in protection and adaptability" />
     <div
       ref="localRef"
       class="local"
@@ -26,17 +26,17 @@ const { setWatermark: setGlobalWatermark, clearWatermark: clearGlobalWatermark }
         type="primary"
         size="small"
         square
-        @click="setWatermark('局部水印', { color: '#409eff', width: 200, height: 150 })"
+        @click="setWatermark('Local Watermark', { color: '#409eff', width: 200, height: 150 })"
       >
-        创建局部水印
+        Create Local Watermark
       </van-button>
       <van-button
         type="warning"
         size="small"
         square
-        @click="setWatermark('没有防御功能的局部水印', { color: '#e6a23c', defense: false, width: 200, height: 150 })"
+        @click="setWatermark('Local Watermark without Protection', { color: '#e6a23c', defense: false, width: 200, height: 150 })"
       >
-        创建无防御局部水印
+        Create Local Watermark Without Protection
       </van-button>
       <van-button
         type="danger"
@@ -44,7 +44,7 @@ const { setWatermark: setGlobalWatermark, clearWatermark: clearGlobalWatermark }
         square
         @click="clearWatermark"
       >
-        清除局部水印
+        Clear Local Watermark
       </van-button>
     </div>
     <div un-mt-20px un-flex-x-center>
@@ -52,17 +52,17 @@ const { setWatermark: setGlobalWatermark, clearWatermark: clearGlobalWatermark }
         type="primary"
         size="small"
         square
-        @click="setGlobalWatermark('全局水印', { color: '#409eff', width: 200, height: 150 })"
+        @click="setGlobalWatermark('Global Watermark', { color: '#409eff', width: 200, height: 150 })"
       >
-        创建全局水印
+        Create Global Watermark
       </van-button>
       <van-button
         type="warning"
         size="small"
         square
-        @click="setGlobalWatermark('没有防御功能的全局水印', { color: '#e6a23c', defense: false, width: 200, height: 150 })"
+        @click="setGlobalWatermark('Global Watermark without Protection', { color: '#e6a23c', defense: false, width: 200, height: 150 })"
       >
-        创建无防御全局水印
+        Create Global Watermark Without Protection
       </van-button>
       <van-button
         type="danger"
@@ -70,7 +70,7 @@ const { setWatermark: setGlobalWatermark, clearWatermark: clearGlobalWatermark }
         square
         @click="clearGlobalWatermark"
       >
-        清除全局水印
+        Clear Global Watermark
       </van-button>
     </div>
   </div>

@@ -71,11 +71,11 @@ export const routes: RouteRecordRaw[] = [
     }
   },
   {
-    path: "/me",
-    component: () => import("@/pages/me/index.vue"),
-    name: "Me",
+    path: "/notify",
+    component: () => import("@/pages/demo/keep-alive.vue"),
+    name: "Notify",
     meta: {
-      title: "routes.me",
+      title: "routes.notify",
       layout: {
         navBar: {
           showNavBar: true,
@@ -83,7 +83,26 @@ export const routes: RouteRecordRaw[] = [
         },
         tabbar: {
           showTabbar: true,
-          icon: "user-o"
+          icon: "bell.svg"
+        },
+        footer: true
+      }
+    }
+  },
+  {
+    path: "/me",
+    component: () => import("@/pages/me/index.vue"),
+    name: "Me",
+    meta: {
+      title: "routes.login",
+      layout: {
+        navBar: {
+          showNavBar: true,
+          showLeftArrow: false
+        },
+        tabbar: {
+          showTabbar: true,
+          icon: "favicon.png"
         },
         footer: true
       }

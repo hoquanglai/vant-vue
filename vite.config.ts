@@ -35,6 +35,10 @@ export default defineConfig(({ mode }) => {
       port: 3333,
       strictPort: false,
       open: true,
+      watch: {
+        usePolling: true,
+        interval: 100
+      },
       proxy: {
         "/api/v1": {
           target: "https://apifoxmock.com/m1/2930465-2145633-default",

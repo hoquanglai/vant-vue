@@ -16,3 +16,5 @@ vite.config.*.timestamp*
 # Using pnpm and bun
 package-lock.json
 yarn.lock
+docker-compose.yml
+Dockerfile

@@ -1,3 +1,4 @@
+import type UserDto from "@/common/apis/users/userDto"
 import { getCurrentUserApi } from "@@/apis/users"
 import { setToken as _setToken, getToken, removeToken } from "@@/utils/cache/cookies"
 import { pinia } from "@/pinia"
@@ -12,6 +13,7 @@ export const useUserStore = defineStore("user", () => {
   const avatar = ref<string>("")
   const email = ref<string>("")
   const roles = ref<string[]>([])
+  const user = ref({} as UserDto)
 
   const setToken = (value: string) => {
     _setToken(value)
@@ -20,7 +22,10 @@ export const useUserStore = defineStore("user", () => {
 
   const getInfo = async () => {
     const { data } = await getCurrentUserApi()
-    console.log("User Info:", data)
+    if (!data) {
+      return
+    }
+    user.value = data.user
     fullName.value = data.user.fullName
     gender.value = data.user.gender
     professional.value = data.user.professional
@@ -50,6 +55,7 @@ export const useUserStore = defineStore("user", () => {
     businessCountry,
     email,
     avatar,
+    user,
     setToken,
     getInfo,
     changeRoles,

@@ -10,9 +10,9 @@ const value = ref<string>("")
 
 <template>
   <div un-mb-20px>
-    <NoticeBar text="基于 KeepAlive 组件实现的路由缓存，但不受 Layout 影响" />
+    <NoticeBar text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." />
     <van-cell-group inset un-mt-20px>
-      <van-field v-model="value" placeholder="请输入" />
+      <van-field v-model="value" placeholder="Notification" />
     </van-cell-group>
   </div>
 </template>

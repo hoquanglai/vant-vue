@@ -1,29 +1,29 @@
 import type { Router } from "vue-router"
 import { useTitle } from "@@/composables/useTitle"
-import { getToken } from "@@/utils/cache/cookies"
 import NProgress from "nprogress"
 import { useKeepAliveStore } from "@/pinia/stores/keep-alive"
 import { useUserStore } from "@/pinia/stores/user"
-import { isWhiteList } from "@/router/whitelist"
 
 NProgress.configure({ showSpinner: false })
 
 const { setTitle } = useTitle()
 
-const LOGIN_PATH = "/login"
+const LOGIN_PATH = `${import.meta.env.VITE_CAM_BASE_URL}/login/CPlatform?url-callback=dashboard`
+
+const PROFILE_PATH = "/me"
 
 export function registerNavigationGuard(router: Router) {
-  router.beforeEach((to, _from) => {
+  router.beforeEach((to, from, next) => {
     NProgress.start()
     const userStore = useUserStore()
-    if (!getToken()) {
-      if (isWhiteList(to)) return true
-      return LOGIN_PATH
+    const user = userStore.user
+    const requiresAuth = [PROFILE_PATH].includes(to.path)
+    if (requiresAuth && (!user || Object.keys(user).length === 0)) {
+      window.location.href = LOGIN_PATH
     }
-    if (to.path === LOGIN_PATH) return "/"
-    if (to.meta.roles ? userStore.roles.some(role => to.meta.roles!.includes(role)) : true) return true
-    return "/403"
+    next()
   })
+
   router.afterEach((to) => {
     const keepAliveStore = useKeepAliveStore()
     if (to.path === LOGIN_PATH) keepAliveStore.delAllCachedRoutes()

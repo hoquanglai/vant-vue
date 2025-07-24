@@ -7,8 +7,6 @@ const userStore = useUserStore()
 
 const { isDark, initDark } = useDark()
 
-const isLoading = computed(() => userStore.token && !userStore.fullName)
-
 onMounted(() => {
   userStore.getInfo()
 })

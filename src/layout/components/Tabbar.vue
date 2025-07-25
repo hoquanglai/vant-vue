@@ -69,5 +69,7 @@ const tabbarItemList = computed(() => {
 .tabbar .van-icon__image {
   border-radius: 50%;
   object-fit: cover;
+  width: 22px;
+  height: 22px;
 }
 </style>

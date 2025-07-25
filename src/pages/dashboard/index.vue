@@ -12,13 +12,8 @@ const loading = ref(false)
 const communities = ref<any[]>([])
 const industries = ref<any[]>([])
 const showMenu = ref(false)
-const communityType = ref(0)
-const communityTypeOption = ref([
-  { text: "Venture Sourcing Communities", value: 0 },
-  { text: "Entrepreneurial Communities", value: 1 },
-  { text: "Fundraise Communities", value: 2 },
-  { text: "Talent Communities", value: 3 }
-])
+const showDropdowm = ref(false)
+const communityType = ref("Venture Sourcing Communities")
 
 const filteredCommunities = computed(() => {
   let list = communities.value
@@ -37,6 +32,11 @@ const filteredCommunities = computed(() => {
 
   return list
 })
+
+function setCommunityType(type: string) {
+  communityType.value = type
+  showDropdowm.value = false
+}
 
 async function fetchCommunities() {
   loading.value = true
@@ -89,6 +89,11 @@ async function getAllIndustries() {
 function onMenuClick() {
   showMenu.value = true
 }
+
+function onDropdownClick() {
+  showDropdowm.value = true
+}
+
 function activeTagName(key: string) {
   const index = activeTag.value.indexOf(key)
   if (index === -1) {
@@ -128,10 +133,13 @@ onMounted(() => {
       </div>
 
       <!-- Dropdown -->
-      <div class="dropdown" un-px-16px un-mt-20px>
-        <van-dropdown-menu>
-          <van-dropdown-item v-model="communityType" :options="communityTypeOption" />
-        </van-dropdown-menu>
+      <div class="dropdown" un-px-16px un-mt-20px @click="onDropdownClick()">
+        <div class="dropdown-title">
+          {{ communityType }}
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="7" viewBox="0 0 13 7" fill="none">
+            <path d="M6.12412 6.39812C6.42972 6.66931 6.88979 6.66931 7.19539 6.39812L12.5697 1.62897C13.125 1.13622 12.7765 0.218364 12.0341 0.218364H1.28543C0.543047 0.218364 0.194517 1.13622 0.749791 1.62897L6.12412 6.39812Z" fill="#2196F3" />
+          </svg>
+        </div>
       </div>
 
       <!-- Filter Tags -->
@@ -168,8 +176,34 @@ onMounted(() => {
       </div>
     </div>
     <van-popup
+      v-model:show="showDropdowm"
+      position="bottom"
+      round
+      :style="{ width: '100%', height: '45%' }"
+    >
+      <div class="flex justify-center mt-4 my-2">
+        <img un-h-48px src="https://dev-b2bcommunity.up4d-group.com/assets/images/dashboard/logo-header.svg" alt="">
+      </div>
+      <div class="dropdown-description">
+        Choose your Community Orientation
+      </div>
+      <div @click="setCommunityType('Venture Sourcing Communities')" class="dropdown-item">
+        Venture Sourcing Communities
+      </div>
+      <div @click="setCommunityType('Entrepreneurial Communities')" class="dropdown-item">
+        Entrepreneurial Communities
+      </div>
+      <div @click="setCommunityType('Fundraise Communities')" class="dropdown-item">
+        Fundraise Communities
+      </div>
+      <div @click="setCommunityType('Talent Communities')" class="dropdown-item">
+        Talent Communities
+      </div>
+    </van-popup>
+    <van-popup
       v-model:show="showMenu"
       position="left"
+
       :style="{ width: '80%', height: '100%' }"
     >
       <div class="menu-item">
@@ -275,5 +309,40 @@ onMounted(() => {
 }
 .menu-item:first-child {
   margin-top: 15px;
+}
+.dropdown-title {
+  background: white;
+  padding: 12px;
+  border-radius: 40px;
+  color: #2196f3;
+  font-weight: bold;
+  font-size: 16px;
+  font-style: normal;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.dropdown-item {
+  color: #000000;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 30px;
+  padding: 4px 25px;
+  border-bottom: 1px solid #d9d9d94d;
+}
+.dropdown-item:first-child {
+  margin-top: 20px;
+}
+.dropdown-item:last-child {
+  border-bottom: unset;
+}
+.dropdown-description {
+  text-align: center;
+  border-bottom: min(0.267vw, 2px) solid #d9d9d94d;
+  padding-bottom: 15px;
+  font-size: 13px;
+  color: #606060;
 }
 </style>

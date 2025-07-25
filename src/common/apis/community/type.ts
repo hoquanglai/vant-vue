@@ -1,11 +1,10 @@
-import { ApiResponseData } from "types/api"
+import type { ApiResponseData } from "types/api"
 
 export interface CommunityListDto {
   memberCount: number
   community: CommunityDto
   setting: CommunitySettingDto
 }
-
 
 export interface CommunityDto {
   id: string
@@ -43,8 +42,8 @@ export interface CommunitySettingDto {
   eventType: string | null
   pollsAndSurveysType: string | null
   color: string | null
-  industries: string | null 
-  language: string | null 
+  industries: string | null
+  language: string | null
   activeCommunities: string | null
   rules: string | null
   integration: string | null
@@ -55,5 +54,11 @@ export interface CommunitySettingDto {
   memberCount: number
 }
 
+export interface Industry {
+  key: string
+  description: string
+  value: string
+  communityCount: number
+}
 
 export type CurrentUserResponseData = ApiResponseData<CommunityListDto>

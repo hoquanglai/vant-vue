@@ -17,5 +17,6 @@ export default {
   prTip: "🔥 More excellent demos – we look forward to your PR 👏🏻",
   dashboard: "Dashboard",
   profile: "Profile",
-  notify: "Notify"
+  notify: "Notify",
+  explore: "Explore"
 }

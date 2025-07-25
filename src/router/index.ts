@@ -35,7 +35,7 @@ export const routes: RouteRecordRaw[] = [
     }
   },
   {
-    path: "/dashboard",
+    path: "/",
     component: () => import("@/pages/dashboard/index.vue"),
     name: "Dashboard",
     meta: {
@@ -47,25 +47,25 @@ export const routes: RouteRecordRaw[] = [
         },
         tabbar: {
           showTabbar: true,
-          icon: "apps-o"
+          icon: "home-o"
         }
       }
     }
   },
   {
-    path: "/",
-    component: () => import("@/pages/home/index.vue"),
-    name: "Home",
+    path: "/explore",
+    component: () => import("@/pages/explore/index.vue"),
+    name: "explore",
     meta: {
-      title: "routes.home",
+      title: "routes.explore",
       layout: {
         navBar: {
-          showNavBar: false,
+          showNavBar: true,
           showLeftArrow: false
         },
         tabbar: {
           showTabbar: true,
-          icon: "home-o"
+          icon: "fire-o"
         }
       }
     }

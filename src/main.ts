@@ -12,12 +12,17 @@ import "normalize.css"
 import "nprogress/nprogress.css"
 import "@@/assets/styles/index.css"
 import "virtual:uno.css"
+import { DropdownItem, DropdownMenu, Popup } from "vant"
 
 const app = createApp(App)
 
 installPlugins(app)
 
-app.use(pinia).use(router)
+app.use(pinia)
+app.use(Popup)
+app.use(router)
+app.use(DropdownMenu)
+app.use(DropdownItem)
 
 router.isReady().then(() => {
   app.mount("#app")

@@ -17,6 +17,13 @@ export default defineConfig({
     colors: {
       primary: "var(--mobvue-primary-color)",
       bg: "var(--mobvue-bg-color)"
+    },
+    fontSize: {
+      xs: ["14px", { lineHeight: "normal" }],
+      sm: ["16px", { lineHeight: "normal" }],
+      md: ["16px", { lineHeight: "normal" }],
+      lg: ["18px", { lineHeight: "normal" }],
+      xl: ["20px", { lineHeight: "normal" }]
     }
   },
   rules: [

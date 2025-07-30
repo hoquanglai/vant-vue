@@ -40,13 +40,14 @@ export default defineConfig(({ mode }) => {
         interval: 100
       },
       proxy: {
-        "/api/v1": {
-          target: "https://apifoxmock.com/m1/2930465-2145633-default",
+        "/api": {
+          target: "http://localhost:8080",
           ws: false,
-          changeOrigin: true
+          changeOrigin: true,
+          secure: false
         }
       },
-      cors: true,
+      cors: false,
       warmup: {
         clientFiles: [
           "./src/http/**/*.*",

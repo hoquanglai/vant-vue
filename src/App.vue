@@ -32,3 +32,11 @@ initDark()
     <Layout />
   </van-config-provider>
 </template>
+
+<style>
+.center {
+  width: fit-content;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+</style>

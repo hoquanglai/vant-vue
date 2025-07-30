@@ -53,23 +53,59 @@ export const routes: RouteRecordRaw[] = [
     }
   },
   {
-    path: "/explore",
-    component: () => import("@/pages/explore/index.vue"),
-    name: "explore",
+    path: "/dashboard2",
+    component: () => import("@/pages/dashboard2/index.vue"),
+    name: "Dashboard2",
     meta: {
-      title: "routes.explore",
+      title: "Dashboard2",
       layout: {
         navBar: {
-          showNavBar: true,
+          showNavBar: false,
           showLeftArrow: false
         },
         tabbar: {
           showTabbar: true,
-          icon: "fire-o"
+          icon: "home-o"
         }
       }
     }
   },
+  {
+    path: "/dashboard3",
+    component: () => import("@/pages/dashboard3/index.vue"),
+    name: "Dashboard3",
+    meta: {
+      title: "Dashboard3",
+      layout: {
+        navBar: {
+          showNavBar: false,
+          showLeftArrow: false
+        },
+        tabbar: {
+          showTabbar: true,
+          icon: "home-o"
+        }
+      }
+    }
+  },
+  // {
+  //   path: "/explore",
+  //   component: () => import("@/pages/explore/index.vue"),
+  //   name: "explore",
+  //   meta: {
+  //     title: "routes.explore",
+  //     layout: {
+  //       navBar: {
+  //         showNavBar: true,
+  //         showLeftArrow: false
+  //       },
+  //       tabbar: {
+  //         showTabbar: true,
+  //         icon: "fire-o"
+  //       }
+  //     }
+  //   }
+  // },
   {
     path: "/notify",
     component: () => import("@/pages/demo/keep-alive.vue"),
@@ -178,16 +214,12 @@ export const demoRoutes: RouteRecordRaw[] = [
     }
   },
   {
-    path: "/i18n",
-    component: () => import("@/pages/demo/i18n.vue"),
-    name: "I18n",
+    path: "/details/:id",
+    component: () => import("@/pages/details/index.vue"),
+    name: "details",
     meta: {
-      title: "routes.i18n",
+      title: "routes.explore",
       layout: {
-        navBar: {
-          showNavBar: true,
-          showLeftArrow: true
-        }
       }
     }
   }

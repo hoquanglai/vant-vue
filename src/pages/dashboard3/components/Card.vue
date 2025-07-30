@@ -38,7 +38,9 @@ const { community } = defineProps<{ community: CommunityListDto }>()
           {{ community?.community?.name }}
         </div>
       </div>
-      <div v-html="community?.setting?.description" un-text-sm un-color-gray-700 un-pt-4px un-pb-8px />
+      <div un-text-sm un-color-gray-700 un-pt-4px un-pb-8px>
+        {{ community?.setting?.description }}
+      </div>
       <div class="member-number-wrapper">
         <div class="member">
           {{ community?.memberCount }} Member

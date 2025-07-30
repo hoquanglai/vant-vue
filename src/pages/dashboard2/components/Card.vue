@@ -28,7 +28,7 @@ const { community } = defineProps<{ community: CommunityListDto }>()
     <div class="info-wrapper" un-px-12px>
       <div class="flex items-center" un-gap-8px un-py-8px>
         <img
-          :src="community?.setting?.faviconLogoUrl || 'https://dev-b2bcommunity.up4d-group.com/static/0/community/ae98cc2d-1274-4431-800a-7d3bfe035dfc/image/7e79fb50-c6e8-493c-9576-a49651f9d28c'"
+          src="https://dev-b2bcommunity.up4d-group.com/static/0/community/ae98cc2d-1274-4431-800a-7d3bfe035dfc/image/7e79fb50-c6e8-493c-9576-a49651f9d28c"
           alt="favicon"
           un-w-30px
           un-h-30px
@@ -38,7 +38,9 @@ const { community } = defineProps<{ community: CommunityListDto }>()
           {{ community?.community?.name }}
         </div>
       </div>
-      <div v-html="community?.setting?.description" un-text-sm un-color-gray-700 un-pt-4px un-pb-8px />
+      <div un-text-sm un-color-gray-700 un-pt-4px un-pb-8px>
+        {{ community?.setting?.description }}
+      </div>
       <div class="member-number-wrapper">
         <div class="member">
           {{ community?.memberCount }} Member
@@ -84,7 +86,7 @@ const { community } = defineProps<{ community: CommunityListDto }>()
   font-family: Lato;
   font-size: 12px;
   font-style: normal;
-  font-weight: bold;
+  font-weight: 700;
   line-height: normal;
 }
 </style>

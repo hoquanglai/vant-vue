@@ -12,7 +12,13 @@ export function getCommunitiesApi(form: any) {
 export function getIndustry() {
   return request<CommunityListDto.CurrentUserResponseData>({
     url: "/public/industries/list",
-    method: "post",
-    data: {}
+    method: "post"
+  })
+}
+
+export function getMyCommunity() {
+  return request<CommunityListDto.CurrentUserResponseData>({
+    url: "/api/community/my-community",
+    method: "post"
   })
 }

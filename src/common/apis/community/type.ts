@@ -54,6 +54,32 @@ export interface CommunitySettingDto {
   memberCount: number
 }
 
+export interface JoinedCommunity {
+  communityId: string
+  memberId: string
+  communityName: string | null
+  communitySlug: string | null
+  joinAt: number | null
+  MemberNotifyDto: MemberNotifyDto
+  image: string | null
+  shortDescription: string | null
+  isPrivated: boolean | null
+  type: string
+
+}
+
+export interface MemberNotifyDto {
+  isSubscribedToNewsletter: boolean | null
+  notifySupport: boolean | null
+  notifyDocShare: boolean | null
+  notifyChat: boolean | null
+  notifyPost: boolean | null
+  notifyLinkShare: boolean | null
+  notifyEvent: boolean | null
+  notifyPollAndSurvey: boolean | null
+  notifyNews: boolean | null
+}
+
 export interface Industry {
   key: string
   description: string

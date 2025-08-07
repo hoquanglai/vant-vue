@@ -1,24 +1,40 @@
 <script setup lang="ts">
+import RulePopup from "./popup/RulePopup.vue"
+
 defineOptions({
   name: "DetailPage"
 })
 
 const title = ref<string>("")
 const description = ref<string>("")
+const showRulePopup = ref(false)
+
+function updateRulePopupStatus(status: boolean) {
+  showRulePopup.value = status
+}
 </script>
 
 <template>
-  <div un-mb-20px>
+  <div class="relative" un-mb-20px>
+    <div class="logo-wrapper">
+      <img class="logo-url" src="https://b2bcommunity.up4d-group.com/static/0/community/962a59ff-9ae8-4c82-a595-be15382a28b9/image/40c5a077-8efe-43f1-b58d-41232470dd2f" alt="logo">
+    </div>
     <img class="banner-url" src="https://b2bcommunity.up4d-group.com/static/0/community/926224d8-a9b3-43a4-9816-33682ae00467/image/44cf3b1b-cb85-4e20-9694-4c8b364da2b3" alt="">
   </div>
 
-  <div>
-    <p>Welcome to the Wolfram Talent Community</p>
+  <div class="text-center text-grey uppercase font-bold">
+    Welcome to the Wolfram Talent Community
   </div>
-
-  <van-button round class="center">
+  <div class="text-center text-grey text-xs mt-3 px-4">
+    Achieving more together – through a culture of appreciation, experience and progress. Wolfram Industrie offers space for growth to all.
+  </div>
+  <van-button @click="updateRulePopupStatus(true)" class="ml-1/2 -translate-x-1/2 mt-3 bg-primary text-white" round>
     Join Community
   </van-button>
+
+  <van-popup v-model:show="showRulePopup" round>
+    <RulePopup />
+  </van-popup>
 
   <div class="title">
     {{ title }}
@@ -99,6 +115,20 @@ p {
 .banner-url {
   width: 100%;
   height: auto;
+}
+.logo-wrapper {
+  position: absolute;
+  top: 50%;
+  max-height: 220px;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  height: 50%;
+  left: 15%;
+  .logo-url {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
 }
 .title {
   color: #606060;

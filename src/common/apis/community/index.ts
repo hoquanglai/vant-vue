@@ -22,3 +22,10 @@ export function getMyCommunity() {
     method: "post"
   })
 }
+
+export function getJoinedCommunity() {
+  return request<CommunityListDto.CurrentUserResponseData>({
+    url: "/api/member/my-community-joined",
+    method: "post"
+  })
+}

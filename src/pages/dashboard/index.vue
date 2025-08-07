@@ -3,7 +3,9 @@ import type { CommunityListDto, Industry } from "@/common/apis/community/type"
 import { getCommunitiesApi, getIndustry } from "@@/apis/community"
 import { onMounted, ref } from "vue"
 
+import { router } from "@/router"
 import Card from "./components/Card.vue"
+import MobileNotSupport from "./components/popup/MobileNotSupport.vue"
 
 const activeTag = ref<string[]>([])
 const loading = ref(false)
@@ -30,18 +32,19 @@ const communityOrientations = ref([
     title: "Talent Communities"
   }
 ])
+const showWarningDesktop = ref(false)
 function getTitleByCode(code: number | null): string {
   const found = communityOrientations.value.find(item => item.value === code)
   return found ? found.title : "Community Orientation"
 }
 const menuItems = ref([
-  { title: "Create a Community", icon: "/images/menu/plus-icon.svg" },
-  { title: "My Profile", icon: "/images/menu/profile-icon.svg" },
-  { title: "My Communities", icon: "/images/menu/community-icon.svg" },
-  { title: "Pricing", icon: "/images/menu/price-icon.svg" },
-  { title: "up4d Community", icon: "/images/menu/up4d-community-icon.svg" },
-  { title: "Tutorial Clip", icon: "/images/menu/clip-icon.svg" },
-  { title: "Questions & Support", icon: "/images/menu/question-support-icon.svg" }
+  { title: "Create a Community", icon: "/images/menu/plus-icon.svg", showPopup: true },
+  { title: "My Profile", icon: "/images/menu/profile-icon.svg", showPopup: false, path: "/me" },
+  { title: "My Communities", icon: "/images/menu/community-icon.svg", showPopup: false, path: "/me" },
+  { title: "Pricing", icon: "/images/menu/price-icon.svg", showPopup: true },
+  { title: "up4d Community", icon: "/images/menu/up4d-community-icon.svg", showPopup: true },
+  { title: "Tutorial Clip", icon: "/images/menu/clip-icon.svg", showPopup: true },
+  { title: "Questions & Support", icon: "/images/menu/question-support-icon.svg", showPopup: true }
 ])
 
 function setCommunityType(type: number) {
@@ -116,6 +119,12 @@ function activeTagName(key: string) {
       activeTag.value = activeTag.value.filter(k => k !== key)
     }
   }
+}
+function updateShowWarningDesktopStatus(status: boolean, path: string = "") {
+  if (!status) {
+    router.push(path)
+  }
+  showWarningDesktop.value = status
 }
 
 onMounted(() => {
@@ -229,9 +238,12 @@ watch(communityType, () => {
 
       :style="{ width: '80%', height: '100%' }"
     >
-      <div v-for=" (item, index) in menuItems" :key="index" class="menu-item">
+      <div @click="updateShowWarningDesktopStatus(item.showPopup, item.path)" v-for=" (item, index) in menuItems" :key="index" un-fw-700 class="menu-item">
         <img :src="item.icon" alt=""> {{ item.title }}
       </div>
+    </van-popup>
+    <van-popup v-model:show="showWarningDesktop" round>
+      <MobileNotSupport :update-show-warning-desktop-status="updateShowWarningDesktopStatus" />
     </van-popup>
     <!-- Community List -->
     <div class="community-list">
@@ -313,7 +325,6 @@ watch(communityType, () => {
   font-family: Lato;
   font-size: 14px;
   font-style: normal;
-  font-weight: 700;
   line-height: 28px;
 }
 .menu-item:first-child {

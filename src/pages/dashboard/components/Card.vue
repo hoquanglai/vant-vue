@@ -1,12 +1,22 @@
 <script setup lang="ts">
 import type { CommunityListDto } from "@@/apis/community/type.ts"
+import { router } from "@/router"
 
 const { community } = defineProps<{ community: CommunityListDto }>()
+
+function moveToDetailPage(community: CommunityListDto) {
+  const slug = community?.setting?.slug
+  if (slug) {
+    router.push({ name: "details", params: { slug } })
+  } else {
+    console.warn("ID (slug) is missing, cannot navigate to detail page.")
+  }
+}
 </script>
 
 <template>
   <div
-
+    @click="moveToDetailPage(community)"
     class="community-card"
     un-mb-20px
     un-bg-white
@@ -38,7 +48,7 @@ const { community } = defineProps<{ community: CommunityListDto }>()
           {{ community?.community?.name }}
         </div>
       </div>
-      <div v-html="community?.setting?.description" un-text-sm un-color-gray-700 un-pt-4px un-pb-8px />
+      <div v-html="community?.setting?.shortDescription" un-text-sm un-color-gray-700 un-pt-4px un-pb-8px />
       <div class="member-number-wrapper">
         <div class="member">
           {{ community?.memberCount }} Member

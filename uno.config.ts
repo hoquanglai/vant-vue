@@ -16,7 +16,9 @@ export default defineConfig({
   theme: {
     colors: {
       primary: "var(--mobvue-primary-color)",
-      bg: "var(--mobvue-bg-color)"
+      bg: "var(--mobvue-bg-color)",
+      blue: "#2196f3",
+      grey: "#606060"
     },
     fontSize: {
       xs: ["14px", { lineHeight: "normal" }],

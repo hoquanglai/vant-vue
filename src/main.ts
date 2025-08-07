@@ -12,7 +12,7 @@ import "normalize.css"
 import "nprogress/nprogress.css"
 import "@@/assets/styles/index.css"
 import "virtual:uno.css"
-import { DropdownItem, DropdownMenu, Popup } from "vant"
+import { DropdownItem, DropdownMenu, Popup, Switch } from "vant"
 
 const app = createApp(App)
 
@@ -23,6 +23,7 @@ app.use(Popup)
 app.use(router)
 app.use(DropdownMenu)
 app.use(DropdownItem)
+app.use(Switch)
 
 router.isReady().then(() => {
   app.mount("#app")

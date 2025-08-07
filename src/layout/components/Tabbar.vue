@@ -26,7 +26,7 @@ const tabbarItemList = computed(() => {
       let iconToUse = route.meta.layout?.tabbar?.icon
       let titleToUse = t(route.meta.title as string)
       if (isLogin) {
-        iconToUse = user.avatar
+        iconToUse = user?.avatar || "https://c-platform-svc.up4d-group.com/assets/images/profile/default-avatar.png"
         titleToUse = t("routes.profile")
       }
 

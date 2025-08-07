@@ -10,7 +10,7 @@ const keepAliveStore = useKeepAliveStore()
 
 const showNavBar = computed(() => route.meta.layout?.navBar?.showNavBar)
 
-const showTabbar = computed(() => route.meta.layout?.tabbar?.showTabbar)
+// const showTabbar = computed(() => route.meta.layout?.tabbar?.showTabbar)
 
 const showFooter = computed(() => route.meta.layout?.footer)
 </script>
@@ -26,6 +26,6 @@ const showFooter = computed(() => route.meta.layout?.footer)
       </router-view>
       <Footer v-if="showFooter" />
     </div>
-    <Tabbar v-if="showTabbar" />
+    <Tabbar />
   </div>
 </template>
